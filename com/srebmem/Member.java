@@ -75,5 +75,25 @@ public class Member {
 	    memberSince + " " + actualRole + " " + team + " " + actualGender; 
 	
     }
+    /**
+     * Method to activate a member.
+     * @param m Member object to be activated
+     */
+    public void activateMember(Member m) {
+	isActive = true;
+    }
+    /**
+     * Method to de-activate a member.
+     * @param m Member object to be de-activated
+     */
+    public void deActivateMember(Member m) {
+	isActive = false;
+    }
+    /**
+     * Method to get the id number.
+     * @param m Member to get the id from
+     * @return id
+     */
+    public int getId(Member m) { return id; }
     
 }

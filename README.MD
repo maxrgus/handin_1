@@ -2,30 +2,34 @@
 
 * toString()
 * readRegisterFromFile()
+* activateMember()
+* deActivateMember()
+* getId()
+* addMember()
 
 ##Methods to do:
 * sortByGivenName()
 * sortByFamilyName()
 * sortByBirth()
 * removeMember()
-* addMember()
-* deActivateMember()
-* activateMember()
 * printTeams()
 
 ##Class to write:
-* MemberList
- * --Move readRegisterFromFile() to MemberList
+* MemberList - Almost done
+ * --Move readRegisterFromFile to MemberList
 
 ##Methods in MemberList:
 * sortByGivenName()
 * sortByFamilyName()
 * sortByBirth()
 * printTeams()
+* addMember()
+* removeMember
 
 ##Methods in Member:
-* removeMember()
-* addMember()
+* toString()
+* getID()
 * deActivateMember()
 * activateMember()
+
 

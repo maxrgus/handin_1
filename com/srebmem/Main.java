@@ -18,10 +18,16 @@ public class Main {
      *
      * @param args not used
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+	throws IOException {
+	
 	String pathToRegister = "com/srebmem/medlemsregister.txt";
 	List<Member> members = readRegisterFromFile(pathToRegister);
-	
+
+	System.out.println(members);
+	MemberList ml = new MemberList();
+	members = ml.addMember(members);
+	System.out.println(members);
 
     }
 
