@@ -1,3 +1,10 @@
+##Methods to do:
+* sortByGivenName()
+* sortByFamilyName()
+* sortByBirth()
+
+
+
 ##Methods done:
 
 * toString()
@@ -10,16 +17,9 @@
 * removeMember()
 * checkArchivedIdFromFile()
 * printTeams()
-
-##Methods to do:
-* sortByGivenName()
-* sortByFamilyName()
-* sortByBirth()
-
-
-##Class to write:
-* MemberList - Almost done
- * --Move readRegisterFromFile to MemberList
+* saveMembersOnExit()
+* saveToFile()
+* etc etc
 
 ##Methods in MemberList:
 * sortByGivenName()
@@ -30,6 +30,7 @@
 * removeMember
 * checkArchivedIdFromFile()
 * printTeams()
+* SaveMembersToFile()
 
 ##Methods in Member:
 * toString()

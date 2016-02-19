@@ -76,15 +76,23 @@ public class Member {
 	
     }
     /**
+     * Method to get the member activation
+     * status
+     * @return isActive
+     */
+    public boolean getMemberStatus() {
+	return isActive;
+    }
+    /**
      * Method to activate a member.
      */
-    public void activateMember() {
+    public void setMemberToActive() {
 	isActive = true;
     }
     /**
      * Method to de-activate a member.
      */
-    public void deActivateMember() {
+    public void setMemberToInactive() {
 	isActive = false;
     }
     /**
@@ -97,5 +105,19 @@ public class Member {
      * @return familyName
      */
     public String getFamilyName() { return familyName; }
+    /**
+     * Method to get the team.
+     * @return team
+     */
     public String getTeam() { return team; }
+    /**
+     * Method returns a string that is saved in the medlemsregister.txt
+     * file
+     * @return id;givenName;familyName;birthday;
+	    memberSince;role;team;gender\n
+     */
+    public String saveToFile() {
+	return id + ";" + givenName + ";" + familyName + ";" + birthday + ";" +
+	    memberSince + ";" + role + ";" + team + ";" + gender + "\n";
+    }
 }

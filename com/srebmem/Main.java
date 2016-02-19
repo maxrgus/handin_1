@@ -23,42 +23,62 @@ public class Main {
 	throws IOException {
 	
 	String pathToRegister = "com/srebmem/medlemsregister.txt";
-	List<Member> members = readRegisterFromFile(pathToRegister);
-
-	System.out.println(members);
 	MemberList ml = new MemberList();
-	ml.printTeams(members);
-
-    }
-
-    /**
-     * Read a .txt file and store the data in an ArrayList of Member objects.
-     *
-     * @return An ArrayList of Member objects.
-     * @param pathToRegister The path to the register file.
-     * @throws IOException Not handled
-     * 
-     */
-    public static List<Member> readRegisterFromFile(String pathToRegister)
-	throws IOException {
-	Scanner sc = new Scanner(new File(pathToRegister));
-	sc.useDelimiter(";|\\n");
-
-	String[] temp = new String[8];
-	List<Member> members = new ArrayList<Member>();
-
-	while (sc.hasNext()) {
-	    for (int i=0; i <= 7; i++) {
-		temp[i] = sc.next();
+	ConsoleMenu menu = new ConsoleMenu();
+	Scanner input = new Scanner(System.in);
+	List<Member> members = ml.readRegisterFromFile(pathToRegister);
+	ml.fillArchiveList(members);
+	boolean run = true;
+	int userInput;
+	while (run == true) {
+	    menu.printMainMenu();
+	    userInput = input.nextInt();
+	    switch (userInput) {
+	    case 1:
+		menu.printSortingMenu();
+		userInput = input.nextInt();
+		switch (userInput) {
+		case 1:
+		    // sorted by familyName
+		    break;
+		case 2:
+		    // sorted by givenName
+		    break;
+		case 3:
+		    // sorted by birthday
+		    break;
+		case 4:
+		    System.out.println(members);
+		    break;
+		case 5: 
+		    
+		}
+	    case 2:
+		ml.addMember(members);
+		break;
+	    case 3:
+		System.out.println(members);
+		ml.removeMember(members);
+		break;
+	    case 4:
+	        ml.printInactiveMembers(members);
+		ml.activateMember(members);
+		break;
+	    case 5:
+		System.out.println(members);
+		ml.deActivateMember(members);
+		break;
+	    case 6:
+	        ml.printTeams(members);
+		break;
+	    case 7:
+		ml.saveMembersOnExit(members);
+		run = false;
+		break;
 	    }
-	    int id = Integer.parseInt(temp[0]);
-	    int role = Integer.parseInt(temp[5]);
-	    int gender = Integer.parseInt(temp[7]);
-	    members.add(new Member(id, temp[1], temp[2], temp[3],
-				   temp[4], role, temp[6], gender));
 	}
-	return members;
+
+
     }
-    
 
 }
