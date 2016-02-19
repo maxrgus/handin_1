@@ -35,7 +35,7 @@ public class MemberList {
 	System.out.println("Enter team");
 	String team = sc.next();
 	Member temp = members.get(members.size() - 1);
-	int id = temp.getId(temp) + 1;
+	int id = temp.getId() + 1;
 	MemberList ml = new MemberList();
 	while (ml.checkArchivedIdFromFile(id) == false) {
 	    id++;
@@ -56,7 +56,7 @@ public class MemberList {
 	System.out.println("Enter the ID of the member you wish to remove");
 	int id = sc.nextInt();
 	for (Member member : members) {
-	    if (member.getId(member) == id) {
+	    if (member.getId() == id) {
 		members.remove(member);
 		break;
 	    }
@@ -94,6 +94,36 @@ public class MemberList {
 	}
 	else {
 	    return false;
+	}
+    }
+    /**
+     * Method for printing team names and all associated
+     * with that team
+     * @param members The list of members
+     * 
+     */
+    public void printTeams(List<Member> members) {
+	TreeSet<String> teams = new TreeSet<String>();
+	for (Member member : members) {
+	    teams.add(member.getTeam());
+	}
+	Iterator<String> iterator = teams.iterator();
+	List<Member> teamMembers = new ArrayList<Member>();
+	String teamName = " ";
+	
+	while (iterator.hasNext()) {
+	    teamName = iterator.next();
+	    for (Member member : members) {
+		if (member.getTeam().equals(teamName) && !member.getTeam().equals("")) {
+		    teamMembers.add(member);
+		}
+		  
+	    }
+	    System.out.println(teamName);
+	    System.out.println("\n");
+	    System.out.println(teamMembers);
+	    System.out.println("\n");
+	    teamMembers.clear();
 	}
     }
 }

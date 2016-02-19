@@ -77,29 +77,25 @@ public class Member {
     }
     /**
      * Method to activate a member.
-     * @param m object to be activated
      */
-    public void activateMember(Member m) {
+    public void activateMember() {
 	isActive = true;
     }
     /**
      * Method to de-activate a member.
-     * @param m Member object to be de-activated
      */
-    public void deActivateMember(Member m) {
+    public void deActivateMember() {
 	isActive = false;
     }
     /**
      * Method to get the id number.
-     * @param m Member to get the id from
      * @return id
      */
-    public int getId(Member m) { return id; }
+    public int getId() { return id; }
     /**
      * Method to get the family name.
-     * @param m Member to get the family name from
      * @return familyName
      */
-    public String getFamilyName(Member m) { return familyName; }
-    
+    public String getFamilyName() { return familyName; }
+    public String getTeam() { return team; }
 }

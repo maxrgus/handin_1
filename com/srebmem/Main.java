@@ -27,10 +27,7 @@ public class Main {
 
 	System.out.println(members);
 	MemberList ml = new MemberList();
-	members = ml.removeMember(members);
-	System.out.println(members);
-	members = ml.addMember(members);
-	System.out.println(members);
+	ml.printTeams(members);
 
     }
 

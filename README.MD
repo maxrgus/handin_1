@@ -9,12 +9,13 @@
 * addMember()
 * removeMember()
 * checkArchivedIdFromFile()
+* printTeams()
 
 ##Methods to do:
 * sortByGivenName()
 * sortByFamilyName()
 * sortByBirth()
-* printTeams()
+
 
 ##Class to write:
 * MemberList - Almost done
@@ -28,6 +29,7 @@
 * addMember()
 * removeMember
 * checkArchivedIdFromFile()
+* printTeams()
 
 ##Methods in Member:
 * toString()
