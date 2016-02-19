@@ -5,13 +5,15 @@
 * activateMember()
 * deActivateMember()
 * getId()
+* getFamilyName()
 * addMember()
+* removeMember()
+* checkArchivedIdFromFile()
 
 ##Methods to do:
 * sortByGivenName()
 * sortByFamilyName()
 * sortByBirth()
-* removeMember()
 * printTeams()
 
 ##Class to write:
@@ -25,10 +27,12 @@
 * printTeams()
 * addMember()
 * removeMember
+* checkArchivedIdFromFile()
 
 ##Methods in Member:
 * toString()
 * getID()
+* getFamilyName()
 * deActivateMember()
 * activateMember()
 

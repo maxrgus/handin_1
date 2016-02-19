@@ -77,7 +77,7 @@ public class Member {
     }
     /**
      * Method to activate a member.
-     * @param m Member object to be activated
+     * @param m object to be activated
      */
     public void activateMember(Member m) {
 	isActive = true;
@@ -95,5 +95,11 @@ public class Member {
      * @return id
      */
     public int getId(Member m) { return id; }
+    /**
+     * Method to get the family name.
+     * @param m Member to get the family name from
+     * @return familyName
+     */
+    public String getFamilyName(Member m) { return familyName; }
     
 }

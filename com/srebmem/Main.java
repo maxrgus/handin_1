@@ -17,6 +17,7 @@ public class Main {
      * The main method for the program
      *
      * @param args not used
+     * @throws IOException Not handled
      */
     public static void main(String[] args)
 	throws IOException {
@@ -26,6 +27,8 @@ public class Main {
 
 	System.out.println(members);
 	MemberList ml = new MemberList();
+	members = ml.removeMember(members);
+	System.out.println(members);
 	members = ml.addMember(members);
 	System.out.println(members);
 
@@ -36,7 +39,7 @@ public class Main {
      *
      * @return An ArrayList of Member objects.
      * @param pathToRegister The path to the register file.
-     * @throws IOException
+     * @throws IOException Not handled
      * 
      */
     public static List<Member> readRegisterFromFile(String pathToRegister)

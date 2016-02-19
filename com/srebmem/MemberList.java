@@ -1,10 +1,11 @@
 package com.srebmem;
 
 import java.util.*;
+import java.io.*;
 
 /**
  * MemberList.java
- * Purpose: Holds varibles and methods related to the memberlist.
+ * Purpose: Holds methods related to the memberlist.
  *
  * @version 1.0 2016-02-25
  * @author Maximilian Gustafsson and Dominika Wróblewska
@@ -14,8 +15,10 @@ public class MemberList {
      * Method to adding a member to the memberlist.
      * @param members The list of type Member to be added to.
      * @return members
+     * @throws IOException Not handled
      */
-    public List<Member> addMember(List<Member> members) {
+    public List<Member> addMember(List<Member> members)
+	throws IOException {
 	Scanner sc = new Scanner(System.in);
 	System.out.println("Enter given name");
 	String givenName = sc.next();
@@ -33,8 +36,64 @@ public class MemberList {
 	String team = sc.next();
 	Member temp = members.get(members.size() - 1);
 	int id = temp.getId(temp) + 1;
+	MemberList ml = new MemberList();
+	while (ml.checkArchivedIdFromFile(id) == false) {
+	    id++;
+	}
 	members.add(new Member(id,givenName,familyName,birthday,memberSince,role,
 			       team,gender));
 	return members;
+    }
+    /**
+     * Method to remove a member from the memberlist.
+     * @param members The list of type Member to be removed from.
+     * @return members
+     * @throws IOException Not handled
+     */
+    public List<Member> removeMember(List<Member> members)
+	throws IOException {
+	Scanner sc = new Scanner(System.in);
+	System.out.println("Enter the ID of the member you wish to remove");
+	int id = sc.nextInt();
+	for (Member member : members) {
+	    if (member.getId(member) == id) {
+		members.remove(member);
+		break;
+	    }
+	}
+	PrintWriter archive = new PrintWriter(new FileWriter("com/srebmem/archivedID.txt", true));
+	archive.print(id + ";");
+	archive.close();
+	return members;
+    }
+    /**
+     * Method to read the archived ID numbers from file and check
+     * if the ID matches the id provided as a parameter.
+     * @param id The ID that needs to be checked.
+     * @return boolean
+     * @throws IOException Not handled
+     */
+    public boolean checkArchivedIdFromFile(int id)
+	throws IOException {
+	Scanner fileReader = new Scanner(new File("com/srebmem/archivedID.txt"));
+	fileReader.useDelimiter(";");
+
+	boolean idNotMatch = false;
+	List<Integer> archivedNumbers = new ArrayList<Integer>();
+	
+	while (fileReader.hasNext()) {
+	    archivedNumbers.add(fileReader.nextInt());
+        }
+	for (Integer archivedId : archivedNumbers) {
+	    if (archivedId != id) {
+		idNotMatch = true;
+	    }
+	}
+	if (idNotMatch == true) {
+	    return true;
+	}
+	else {
+	    return false;
+	}
     }
 }
