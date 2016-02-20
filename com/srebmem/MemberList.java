@@ -2,6 +2,7 @@ package com.srebmem;
 
 import java.util.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 
 /**
  * MemberList.java
@@ -41,7 +42,7 @@ public class MemberList {
 	    id++;
 	}
 	members.add(new Member(id,givenName,familyName,birthday,memberSince,role,
-			       team,gender));
+			       team,gender,true));
 	Member newMember = members.get(members.size() - 1);
 	System.out.println(newMember);
 	System.out.println("Added to list");
@@ -64,6 +65,9 @@ public class MemberList {
 		break;
 	    }
 	}
+	PrintWriter archive = new PrintWriter(new FileWriter("com/srebmem/archivedID.txt", true));
+	archive.print(id + ";");
+	archive.close();
 	return members;
     }
     /**
@@ -76,29 +80,22 @@ public class MemberList {
     public boolean checkArchivedIdFromFile(int id)
 	throws IOException {
 	Scanner fileReader = new Scanner(new File("com/srebmem/archivedID.txt"));
-	BufferedReader br = new BufferedReader(new FileReader("com/srebmem/archivedID.txt"));
-	fileReader.useDelimiter(";");
+	fileReader.useDelimiter(";|\\r |\\n");
 
 	boolean idNotMatch = false;
 	List<Integer> archivedNumbers = new ArrayList<Integer>();
-	if (br.readLine() == null) {
-	    while (fileReader.hasNextInt()) {
-		archivedNumbers.add(fileReader.nextInt());
-	    }
-	    for (Integer archivedId : archivedNumbers) {
-		if (archivedId != id) {
-		    idNotMatch = true;
-		}
-	    }
-	    if (idNotMatch == true) {
-		return true;
-	    }
-	    else {
-		return false;
-	    }
-	} else {
-	    return true;
+	while (fileReader.hasNextInt()) {
+	    archivedNumbers.add(fileReader.nextInt());
 	}
+	for (Integer archivedId : archivedNumbers) {
+	    if (archivedId == id) {
+		idNotMatch = false;
+		break;
+	    } else {
+		idNotMatch = true;
+	    }
+	}
+	return idNotMatch;
     }
     /**
      * Method for printing team names and all associated
@@ -146,18 +143,22 @@ public class MemberList {
 	Scanner sc = new Scanner(new File(pathToRegister));
 	sc.useDelimiter(";|\\r|\\n");
 
-	String[] temp = new String[8];
+	String[] temp = new String[9];
 	List<Member> members = new ArrayList<Member>();
 
 	while (sc.hasNext()) {
-	    for (int i=0; i <= 7; i++) {
+	    for (int i=0; i <= 8; i++) {
 		temp[i] = sc.next();
 	    }
 	    int id = Integer.parseInt(temp[0]);
 	    int role = Integer.parseInt(temp[5]);
 	    int gender = Integer.parseInt(temp[7]);
+	    boolean isActive = true;
+	    if (temp[8].equals("false")) {
+		isActive = false;
+	    }
 	    members.add(new Member(id, temp[1], temp[2], temp[3],
-				   temp[4], role, temp[6], gender));
+			       temp[4], role, temp[6], gender, isActive));
 	}
 	
 	return members;
@@ -186,7 +187,7 @@ public class MemberList {
      */
     public void saveMembersOnExit(List<Member> members)
 	throws IOException {
-	PrintWriter save = new PrintWriter(new FileWriter("com/srebmem/savedmembers.txt", false));
+	PrintWriter save = new PrintWriter(new FileWriter("com/srebmem/medlemsregister.txt", false));
 	for (Member member : members) {
 	    save.print(member.saveToFile());
 	}
@@ -247,4 +248,59 @@ public class MemberList {
 	System.out.println(deActivatedMember + " has been deactivated");
 	return members;
     }
+    /**
+     * Method that sorts by given name.
+     * @param list the memberlist
+     */
+    public void sortByGivenName(List<Member> list) {
+    	Collections.sort(list, new Comparator(){
+		public int compare(Object o1, Object o2)  {
+		    Member s_1 = (Member)o1;
+		    Member s_2 = (Member)o2;
+
+		    return s_1.getGivenName().compareTo(s_2.getGivenName());
+		}
+	    });
+	System.out.println(list);
+    }
+    
+    /**
+     * Method that sorts by family name.
+     * @param list the memberlist
+     */
+    public void sortByFamilyName (List<Member> list) {
+    	Collections.sort(list, new Comparator(){
+    		public int compare(Object o1, Object o2){
+		    Member s_1 = (Member)o1;
+		    Member s_2 = (Member)o2;
+
+		    return s_1.getFamilyName().compareTo(s_2.getFamilyName());
+    		}
+	    });
+	System.out.println(list);
+    }
+    
+    /**
+     * Method that sorts by birthday.
+     * @param list the memberlist
+     */
+    public void sortByBirth (List<Member> list) {
+    	Collections.sort(list, new Comparator(){
+    		public int compare(Object o1, Object o2){
+		    Member s_1 = (Member)o1;
+		    Member s_2 = (Member)o2;
+		    SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd");
+		    try{
+			Date d1=sdf.parse(s_1.getBirthday());
+			Date d2=sdf.parse(s_2.getBirthday());
+			return d1.compareTo(d2);
+		    }catch(Exception e){
+		    }
+
+		    return 0;
+    		}
+	    });
+	System.out.println(list);
+    }
+
 }

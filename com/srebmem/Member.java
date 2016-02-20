@@ -29,10 +29,11 @@ public class Member {
      * @param memberSince The day the member joined formatted as year-month-day.
      * @param role The members role, 0 = player, 1 = coach, 2 = parent.
      * @param team The name of the team, can be blank.
-     * @param gender The gender of the member, 1 = male, 2 = female. 
+     * @param gender The gender of the member, 1 = male, 2 = female.
+     * @param isActive If the member is active or not. 
      */
     public Member(int id, String givenName, String familyName, String birthday,
-		  String memberSince, int role, String team, int gender) {
+		  String memberSince, int role, String team, int gender, boolean isActive) {
 
 	this.id = id;
 	this.givenName = givenName;
@@ -42,7 +43,7 @@ public class Member {
 	this.role = role;
 	this.team = team;
 	this.gender = gender;
-	isActive = true;
+	this.isActive = isActive;
     }
     /**
      * ToString method for Member objects.
@@ -52,6 +53,7 @@ public class Member {
     public String toString() {
 	String actualRole = "UNKNOWN";
 	String actualGender = "UNKNOWN";
+	String activeStatus = "ACTIVE";
 	if (role == 0 && gender == 1) {
 	    actualRole = "PLAYER";
 	    actualGender = "MALE";
@@ -71,8 +73,11 @@ public class Member {
 	    actualRole = "PARENT";
 	    actualGender = "FEMALE";
 	}
+	if (isActive == false) {
+	    activeStatus = "INACTIVE";
+	}
 	return "\n" + id + " " + givenName + " " + familyName + " " + birthday + " " +
-	    memberSince + " " + actualRole + " " + team + " " + actualGender; 
+	    memberSince + " " + actualRole + " " + team + " " + actualGender + " " + activeStatus; 
 	
     }
     /**
@@ -105,6 +110,16 @@ public class Member {
      * @return familyName
      */
     public String getFamilyName() { return familyName; }
+     /**
+     * Method to get the given name.
+     * @return givenName
+     */
+    public String getGivenName() { return givenName; }
+     /**
+     * Method to get the birthday.
+     * @return birthday
+     */
+    public String getBirthday() { return birthday; }
     /**
      * Method to get the team.
      * @return team
@@ -114,10 +129,10 @@ public class Member {
      * Method returns a string that is saved in the medlemsregister.txt
      * file
      * @return id;givenName;familyName;birthday;
-	    memberSince;role;team;gender\n
+	    memberSince;role;team;gender;isActive\n
      */
     public String saveToFile() {
 	return id + ";" + givenName + ";" + familyName + ";" + birthday + ";" +
-	    memberSince + ";" + role + ";" + team + ";" + gender + "\n";
+	    memberSince + ";" + role + ";" + team + ";" + gender + ";" + isActive + "\n";
     }
 }

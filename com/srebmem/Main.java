@@ -2,6 +2,7 @@ package com.srebmem;
 
 import java.util.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 
 /**
  * Main.java
@@ -35,24 +36,28 @@ public class Main {
 	    userInput = input.nextInt();
 	    switch (userInput) {
 	    case 1:
+		List<Member> temp = new ArrayList<Member>(members);
 		menu.printSortingMenu();
 		userInput = input.nextInt();
-		switch (userInput) {
-		case 1:
-		    // sorted by familyName
+		if (userInput == 1) {
+		    ml.sortByFamilyName(temp);
 		    break;
-		case 2:
-		    // sorted by givenName
+		} else if (userInput == 2) {
+		    ml.sortByGivenName(temp);
 		    break;
-		case 3:
-		    // sorted by birthday
+		} else if (userInput == 3) {
+		    ml.sortByBirth(temp);
 		    break;
-		case 4:
+		} else if (userInput == 4) {
 		    System.out.println(members);
 		    break;
-		case 5: 
-		    
+		} else if (userInput == 5) {
+		    break;
+		} else {
+		    System.out.println("Incorrect choice, try again.");
+		    break;
 		}
+		
 	    case 2:
 		ml.addMember(members);
 		break;
@@ -75,6 +80,8 @@ public class Main {
 		ml.saveMembersOnExit(members);
 		run = false;
 		break;
+	    default:
+		System.out.println("Incorrect choice, try again");
 	    }
 	}
 
