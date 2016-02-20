@@ -1,7 +1,4 @@
 ##Methods to do:
-* sortByGivenName()
-* sortByFamilyName()
-* sortByBirth()
 
 
 
@@ -19,7 +16,9 @@
 * printTeams()
 * saveMembersOnExit()
 * saveToFile()
-* etc etc
+* sortByGivenName()
+* sortByFamilyName()
+* sortByBirth()
 
 ##Methods in MemberList:
 * sortByGivenName()
