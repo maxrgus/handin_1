@@ -992,9 +992,9 @@
 992;Anton;Olofsson;2003-06-04;2013-06-04;0;P05;1;true
 993;Astrid;Fransson;1984-06-08;1994-06-08;0;F98;2;true
 994;Kjell;Berglund;1966-02-14;1976-02-14;2;;1;true
-995;Ida;Eriksson;1964-11-30;1974-11-30;2;;2;true
 996;Ingemar;Söderberg;1986-03-31;1996-03-31;0;P98;1;true
 997;Astrid;Karlsson;1983-11-15;1993-11-15;0;F98;2;true
 998;Joakim;Isaksson;2003-07-24;2013-07-24;0;P05;1;true
 999;Eva;Henriksson;1966-06-04;1976-06-04;2;;2;true
-1000;John;Lindqvist;1969-11-09;1979-11-09;2;;1;true
+1001;Maximilian;Gustafsson;1991-08-03;2015-02-20;1;P99;1;false
+1002;Oskar;Oskarsson;1901-01-01;2010-01-01;1;P00;1;false

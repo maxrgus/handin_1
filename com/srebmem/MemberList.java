@@ -174,7 +174,7 @@ public class MemberList {
 	for (Member member : members) {
 	    idnumbers.add(member.getId());
 	}
-	PrintWriter archive = new PrintWriter(new FileWriter("com/srebmem/archivedID.txt", false));
+	PrintWriter archive = new PrintWriter(new FileWriter("com/srebmem/archivedID.txt", true));
 	for (Integer id : idnumbers) {
 	    archive.print(id + ";");
 	}

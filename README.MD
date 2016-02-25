@@ -1,4 +1,7 @@
-##Methods to do:
+##Kompletteringar:
+Felmed. vid ogiltligt inmatning istället för krash. Fånga inputMisMatch exception.
+Om id ej existerar  så visas felmedd istället för ingenting.
+
 
 
 
