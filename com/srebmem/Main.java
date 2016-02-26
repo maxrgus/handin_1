@@ -32,60 +32,58 @@ public class Main {
 	boolean run = true;
 	int userInput;
 	while (run == true) {
-	    menu.printMainMenu();
-	    userInput = input.nextInt();
-	    switch (userInput) {
-	    case 1:
-		List<Member> temp = new ArrayList<Member>(members);
-		menu.printSortingMenu();
-		userInput = input.nextInt();
-		if (userInput == 1) {
-		    ml.sortByFamilyName(temp);
-		    break;
-		} else if (userInput == 2) {
-		    ml.sortByGivenName(temp);
-		    break;
-		} else if (userInput == 3) {
-		    ml.sortByBirth(temp);
-		    break;
-		} else if (userInput == 4) {
-		    System.out.println(members);
-		    break;
-		} else if (userInput == 5) {
-		    break;
-		} else {
-		    System.out.println("Incorrect choice, try again.");
-		    break;
-		}
+		menu.printMainMenu();
+		userInput = menu.askForIntRange();
+		switch (userInput) {
+		case 1:
+		    menu.printSortingMenu();
+		    userInput = menu.askForIntRange();
+		    if (userInput == 1) {
+			System.out.println(ml.sortByFamilyName(members));
+			break;
+		    } else if (userInput == 2) {
+			System.out.println(ml.sortByGivenName(members));
+			break;
+		    } else if (userInput == 3) {
+			System.out.println(ml.sortByBirth(members));
+			break;
+		    } else if (userInput == 4) {
+			System.out.println(members);
+			break;
+		    } else if (userInput == 5) {
+			break;
+		    } else {
+			System.out.println("Incorrect choice, try again.");
+			break;
+		    }
 		
-	    case 2:
-		ml.addMember(members);
-		break;
-	    case 3:
-		System.out.println(members);
-		ml.removeMember(members);
-		break;
-	    case 4:
-	        ml.printInactiveMembers(members);
-		ml.activateMember(members);
-		break;
-	    case 5:
-		System.out.println(members);
-		ml.deActivateMember(members);
-		break;
-	    case 6:
-	        ml.printTeams(members);
-		break;
-	    case 7:
-		ml.saveMembersOnExit(members);
-		run = false;
-		break;
-	    default:
-		System.out.println("Incorrect choice, try again");
-	    }
+		case 2:
+		    ml.addMember(members);
+		    break;
+		case 3:
+		    System.out.println(members);
+		    ml.removeMember(members);
+		    break;
+		case 4:
+		    ml.printInactiveMembers(members);
+		    ml.activateMember(members);
+		    break;
+		case 5:
+		    System.out.println(members);
+		    ml.deActivateMember(members);
+		    break;
+		case 6:
+		    ml.printTeams(members);
+		    break;
+		case 7:
+		    ml.saveMembersOnExit(members);
+		    run = false;
+		    break;
+		default:
+		    System.out.println("Incorrect choice, try again");
+		}
+	}
+	
 	}
 
-
     }
-
-}

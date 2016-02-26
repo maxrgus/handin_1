@@ -56,18 +56,34 @@ public class MemberList {
      */
     public List<Member> removeMember(List<Member> members)
 	throws IOException {
-	Scanner sc = new Scanner(System.in);
-	System.out.println("Enter the ID of the member you wish to remove");
-	int id = sc.nextInt();
-	for (Member member : members) {
-	    if (member.getId() == id) {
-		members.remove(member);
+	ConsoleMenu input = new ConsoleMenu();
+	System.out.println("Enter the ID of the member you wish to remove, enter 0 to exit");
+	boolean idExist = false;
+	boolean run = true;
+	while (run == true) {
+	    int id = input.askForIntRange();
+	    if (id == 0) {
+		run = false;
 		break;
 	    }
+	    for (Member member : members) {
+		if (member.getId() == id) {
+		    idExist = true;
+		    members.remove(member);
+		} else {
+		    idExist = false;
+		}
+	    }
+	    if (idExist == true) {
+		PrintWriter archive = new PrintWriter(new FileWriter("com/srebmem/archivedID.txt", true));
+		archive.print(id + ";");
+		archive.close();
+		run = false;
+		break;
+	    } else {
+		System.out.println("No member with that ID exists, try again");
+	    }
 	}
-	PrintWriter archive = new PrintWriter(new FileWriter("com/srebmem/archivedID.txt", true));
-	archive.print(id + ";");
-	archive.close();
 	return members;
     }
     /**
@@ -214,18 +230,33 @@ public class MemberList {
      * @return members
      */
     public List<Member> activateMember(List<Member> members) {
-	Scanner sc = new Scanner(System.in);
-	System.out.println("Enter the ID of the member you wish to activate");
-	int id = sc.nextInt();
+	ConsoleMenu input = new ConsoleMenu();
+	System.out.println("Enter the ID of the member you wish to activate, enter 0 to exit");
+	boolean idExist = false;
+	boolean run = true;
 	String activatedMember = " ";
-	for (Member member : members) {
-	    if (member.getId() == id) {
-		member.setMemberToActive();
-		activatedMember = member.toString();
+	while (run == true) {
+	    int id = input.askForIntRange();
+	    if (id == 0) {
+		run = false;
 		break;
 	    }
+	    for (Member member : members) {
+		if (member.getId() == id && member.getMemberStatus() == false) {
+		    idExist = true;
+		    member.setMemberToActive();
+		    activatedMember = member.toString();
+		} else {
+		    idExist = false;
+		}
+	    }
+	    if (idExist == true) {
+		System.out.println(activatedMember + " has been activated");
+		run = false;
+	    } else {
+		System.out.println("No member with that ID or the member is already active, enter a new ID");
+	    } 
 	}
-	System.out.println(activatedMember + " has been activated");
 	return members;
     }
     /**
@@ -234,73 +265,63 @@ public class MemberList {
      * @return members
      */
     public List<Member> deActivateMember(List<Member> members) {
-	Scanner sc = new Scanner(System.in);
-	System.out.println("Enter the ID of the member you wish to deactivate");
-	int id = sc.nextInt();
+	ConsoleMenu input = new ConsoleMenu();
+	System.out.println("Enter the ID of the member you wish to deactivate, enter 0 to exit");
+	boolean idExist = false;
+	boolean run = true;
 	String deActivatedMember = " ";
-	for (Member member : members) {
-	    if (member.getId() == id) {
-		member.setMemberToInactive();
-		deActivatedMember = member.toString();
+	while (run == true) {
+	    int id = input.askForIntRange();
+	    if (id == 0) {
+		run = false;
 		break;
 	    }
+	    for (Member member : members) {
+		if (member.getId() == id && member.getMemberStatus() == true) {
+		    idExist = true;
+		    member.setMemberToInactive();
+		    deActivatedMember = member.toString();
+		} else {
+		    idExist = false;
+		}
+	    }
+	    if (idExist == true) {
+		System.out.println(deActivatedMember + " has been deactivated");
+		run = false;
+	    } else {
+		System.out.println("No member with that ID or the member is already inactive, enter a new ID");
+	    } 
 	}
-	System.out.println(deActivatedMember + " has been deactivated");
 	return members;
     }
     /**
      * Method that sorts by given name.
-     * @param list the memberlist
+     * @param members the memberlist
      */
-    public void sortByGivenName(List<Member> list) {
-    	Collections.sort(list, new Comparator(){
-		public int compare(Object o1, Object o2)  {
-		    Member s_1 = (Member)o1;
-		    Member s_2 = (Member)o2;
-
-		    return s_1.getGivenName().compareTo(s_2.getGivenName());
-		}
-	    });
-	System.out.println(list);
+    public List<Member> sortByGivenName(List<Member> members) {
+    	List<Member> temp = new ArrayList<Member>(members);
+	Collections.sort(temp, new GivenNameComparator());
+	return temp;
     }
     
     /**
      * Method that sorts by family name.
-     * @param list the memberlist
+     * @param members the memberlist
      */
-    public void sortByFamilyName (List<Member> list) {
-    	Collections.sort(list, new Comparator(){
-    		public int compare(Object o1, Object o2){
-		    Member s_1 = (Member)o1;
-		    Member s_2 = (Member)o2;
-
-		    return s_1.getFamilyName().compareTo(s_2.getFamilyName());
-    		}
-	    });
-	System.out.println(list);
+    public List<Member> sortByFamilyName (List<Member> members) {
+    	List<Member> temp = new ArrayList<Member>(members);
+	Collections.sort(temp, new FamilyNameComparator());
+	return temp;
     }
     
     /**
      * Method that sorts by birthday.
-     * @param list the memberlist
+     * @param members the memberlist
      */
-    public void sortByBirth (List<Member> list) {
-    	Collections.sort(list, new Comparator(){
-    		public int compare(Object o1, Object o2){
-		    Member s_1 = (Member)o1;
-		    Member s_2 = (Member)o2;
-		    SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd");
-		    try{
-			Date d1=sdf.parse(s_1.getBirthday());
-			Date d2=sdf.parse(s_2.getBirthday());
-			return d1.compareTo(d2);
-		    }catch(Exception e){
-		    }
-
-		    return 0;
-    		}
-	    });
-	System.out.println(list);
+    public List<Member> sortByBirth (List<Member> members) {
+	List<Member> temp = new ArrayList<Member>(members);
+	Collections.sort(temp, new BirthdayComparator());
+	return temp;
+    
     }
-
 }

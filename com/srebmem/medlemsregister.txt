@@ -996,5 +996,4 @@
 997;Astrid;Karlsson;1983-11-15;1993-11-15;0;F98;2;true
 998;Joakim;Isaksson;2003-07-24;2013-07-24;0;P05;1;true
 999;Eva;Henriksson;1966-06-04;1976-06-04;2;;2;true
-1001;Maximilian;Gustafsson;1991-08-03;2015-02-20;1;P99;1;false
-1002;Oskar;Oskarsson;1901-01-01;2010-01-01;1;P00;1;false
+1001;Maximilian;Gustafsson;1991-08-03;2015-02-20;1;P99;1;true

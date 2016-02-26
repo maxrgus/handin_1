@@ -32,4 +32,12 @@ public class ConsoleMenu {
 	System.out.println("5. Return to main menu\n");
 	System.out.println("----------------------");
     }
+    public int askForIntRange() {
+	Scanner input = new Scanner(System.in);
+	try {
+	    return input.nextInt();
+	} catch (InputMismatchException e) {
+	    return 99999;
+	}
+    }
 }
